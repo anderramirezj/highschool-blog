@@ -4,11 +4,13 @@ body {
     padding: 20px;
     background: #f0f0f0;
     position: relative;
+    overflow-x: hidden;
 }
 
 .container {
-    width: 70%;
-    margin-left: auto;
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
     text-align: right;
     position: relative;
     z-index: 2;
@@ -39,9 +41,11 @@ body {
     background: white;
     padding: 20px;
     border: 1px solid black;
-    max-width: 80%;
+    width: 90%;
+    max-width: 500px;
     max-height: 80vh;
     overflow-y: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .close {
@@ -57,9 +61,6 @@ body {
     font-size: 24px;
     text-decoration: none;
     color: black;
-    padding: 0;
-    margin: 0;
-    line-height: 1;
 }
 
 .instruction {
@@ -82,8 +83,9 @@ body {
 }
 
 img {
-    width: 300px;
-    height: 300px;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
     object-fit: cover;
     border: 2px solid black;
     background: white;
@@ -107,15 +109,15 @@ img {
     z-index: 1000;
     backdrop-filter: blur(10px);
     transition: opacity 1s ease, backdrop-filter 1s ease;
-    text-align: center; /* Ensure text is centered */
+    text-align: center;
 }
 
 .password-input-container {
     display: flex;
     align-items: center;
     gap: 10px;
-    justify-content: center; /* Center the input and arrow horizontally */
-    width: 100%; /* Ensure the container takes full width */
+    justify-content: center;
+    width: 100%;
 }
 
 .password-input {
@@ -127,7 +129,7 @@ img {
     text-align: center;
     outline: none;
     margin-top: 20px;
-    width: 200px; /* Fixed width for better alignment */
+    width: 200px;
 }
 
 .password-input::placeholder {
@@ -138,7 +140,7 @@ img {
     color: red;
     margin-top: 10px;
     display: none;
-    text-align: center; /* Ensure error message is centered */
+    text-align: center;
 }
 
 .confirm-arrow {
@@ -182,21 +184,30 @@ img {
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     .password-input {
-        font-size: 1.2em; /* Smaller font size for mobile */
-        width: 90%; /* Wider input field */
+        font-size: 1.2em;
+        width: 80%;
     }
 
     .confirm-arrow {
-        font-size: 1.2em; /* Smaller arrow for mobile */
+        font-size: 1.2em;
     }
 
     .popup-content {
-        max-width: 90%; /* Wider popup for mobile */
-        padding: 10px;
+        max-width: 95%;
+        padding: 15px;
     }
 
     .popup-content img {
         width: 100%;
         height: auto;
+    }
+
+    .container {
+        width: 95%;
+        text-align: center;
+    }
+
+    .instruction {
+        text-align: center;
     }
 }

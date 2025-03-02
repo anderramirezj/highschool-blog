@@ -5,90 +5,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geniuses Archive</title>
     <style>
-        body {
-            font-family: monospace;
-            background-color: #f0f0f0;
-            color: black;
-            padding: 20px;
-        }
-        .back-arrow {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            font-size: 24px;
-            text-decoration: none;
-            color: black;
-            padding: 0;
-            margin: 0;
-            line-height: 1;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            display: flex;
-            flex-wrap: wrap; /* Allow items to wrap to the next line */
-            gap: 20px;
-            justify-content: center; /* Center items horizontally */
-        }
-        .file {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            width: 120px; /* Set a fixed width for each file */
-            text-align: center; /* Center the text below the icon */
-            padding: 10px; /* Add some padding inside the file */
-            box-sizing: border-box; /* Ensure padding is included in the width */
-            background: transparent; /* Ensure no background color */
-            border: none; /* Remove any border */
-            outline: none; /* Remove any outline */
-        }
-        .file:hover {
-            background: rgba(0, 0, 0, 0.05); /* Add a subtle hover effect */
-        }
-        .file-icon {
-            width: 100px;
-            height: 100px;
-            background-size: cover; /* Ensure the icon/thumbnail covers the area */
-            background-position: center; /* Center the icon/thumbnail */
-            margin-bottom: 5px; /* Space between icon and text */
-            border-radius: 5px; /* Optional: Add rounded corners to the icon */
-        }
-        .file-name {
-            color: red;
-            margin-top: 5px;
-            word-wrap: break-word; /* Ensure long file names wrap */
-            max-width: 100%; /* Ensure text doesn't overflow */
-        }
-        .popout {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            display: none;
-            max-width: 600px;
-            text-align: center;
-        }
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 18px;
-            cursor: pointer;
-        }
-        iframe, img {
-            width: 100%;
-            max-width: 500px;
-            height: auto;
-            margin-top: 10px;
-        }
+body {
+    font-family: monospace;
+    background-color: #f0f0f0;
+    color: black;
+    padding: 20px;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    background: #f0f0f0; /* Match the body background */
+    padding: 10px;
+    text-align: left;
+    z-index: 1000;
+    width: 100%;
+}
+
+.back-arrow {
+    font-size: 24px;
+    text-decoration: none;
+    color: black;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    gap: 20px;
+    justify-content: center; /* Center items horizontally */
+}
+
+.file {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    width: 120px; /* Set a fixed width for each file */
+    text-align: center; /* Center the text below the icon */
+    padding: 10px; /* Add some padding inside the file */
+    box-sizing: border-box; /* Ensure padding is included in the width */
+    background: transparent; /* Ensure no background color */
+    border: none; /* Remove any border */
+    outline: none; /* Remove any outline */
+}
+
+.file:hover {
+    background: rgba(0, 0, 0, 0.05); /* Add a subtle hover effect */
+}
+        
+.file-icon {
+    width: 100px;
+    height: 100px;
+    background-size: cover; /* Ensure the icon/thumbnail covers the area */
+    background-position: center; /* Center the icon/thumbnail */
+    margin-bottom: 5px; /* Space between icon and text */
+    border-radius: 5px; /* Optional: Add rounded corners to the icon */
+}
+        
+.file-name {
+    color: red;
+    margin-top: 5px;
+    word-wrap: break-word; /* Ensure long file names wrap */
+    max-width: 100%; /* Ensure text doesn't overflow */
+}
+
+.popout {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: none;
+    max-width: 600px;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+        
+iframe, img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin-top: 10px;
+}
+        
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-arrow">← Back</a>
+    
+    <div class="header">
+        <a href="index.html" class="back-arrow">← Back</a>
+    </div>
+
     <div class="container">
         <div class="file" onclick="openPopout('./images/geniuses/noahdillon_alexconsani.jpg', 'image')">
             <div class="file-icon" style="background-image: url('./images/geniuses/noahdillon_alexconsani.jpg');"></div>
