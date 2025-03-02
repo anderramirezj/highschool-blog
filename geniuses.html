@@ -5,87 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geniuses Archive</title>
     <style>
-        body {
-            font-family: monospace;
-            background-color: #f0f0f0;
-            color: black;
-            padding: 20px;
+    body {
+        font-family: monospace;
+        background-color: #f0f0f0;
+        color: black;
+        padding: 20px;
+    }
+    .back-arrow {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        font-size: 24px;
+        text-decoration: none;
+        color: black;
+        padding: 0;
+        margin: 0;
+        line-height: 1;
+    }
+    .container {
+        max-width: 800px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        padding-top: 60px; /* Add padding to the top to prevent overlap */
+    }
+    .file {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        width: 120px;
+        text-align: center;
+        padding: 10px;
+        box-sizing: border-box;
+        background: transparent;
+        border: none;
+        outline: none;
+    }
+    .file:hover {
+        background: rgba(0, 0, 0, 0.05);
+    }
+    .file-icon {
+        width: 100px;
+        height: 100px;
+        background-size: cover;
+        background-position: center;
+        margin-bottom: 5px;
+        border-radius: 5px;
+    }
+    .file-name {
+        color: red;
+        margin-top: 5px;
+        word-wrap: break-word;
+        max-width: 100%;
+    }
+    .popout {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        display: none;
+        max-width: 600px;
+        text-align: center;
+    }
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+    iframe, img {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        margin-top: 10px;
+    }
+
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 600px) {
+        .container {
+            padding-top: 80px; /* Increase padding for smaller screens */
         }
         .back-arrow {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            font-size: 24px;
-            text-decoration: none;
-            color: black;
-            padding: 0;
-            margin: 0;
-            line-height: 1;
+            top: 10px; /* Adjust the position of the back button */
+            left: 10px;
+            font-size: 20px; /* Slightly smaller font size for mobile */
         }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            display: flex;
-            flex-wrap: wrap; /* Allow items to wrap to the next line */
-            gap: 20px;
-            justify-content: center; /* Center items horizontally */
-        }
-        .file {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            width: 120px; /* Set a fixed width for each file */
-            text-align: center; /* Center the text below the icon */
-            padding: 10px; /* Add some padding inside the file */
-            box-sizing: border-box; /* Ensure padding is included in the width */
-            background: transparent; /* Ensure no background color */
-            border: none; /* Remove any border */
-            outline: none; /* Remove any outline */
-        }
-        .file:hover {
-            background: rgba(0, 0, 0, 0.05); /* Add a subtle hover effect */
-        }
-        .file-icon {
-            width: 100px;
-            height: 100px;
-            background-size: cover; /* Ensure the icon/thumbnail covers the area */
-            background-position: center; /* Center the icon/thumbnail */
-            margin-bottom: 5px; /* Space between icon and text */
-            border-radius: 5px; /* Optional: Add rounded corners to the icon */
-        }
-        .file-name {
-            color: red;
-            margin-top: 5px;
-            word-wrap: break-word; /* Ensure long file names wrap */
-            max-width: 100%; /* Ensure text doesn't overflow */
-        }
-        .popout {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            display: none;
-            max-width: 600px;
-            text-align: center;
-        }
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 18px;
-            cursor: pointer;
-        }
-        iframe, img {
-            width: 100%;
-            max-width: 500px;
-            height: auto;
-            margin-top: 10px;
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
     <a href="index.html" class="back-arrow">← Back</a>
