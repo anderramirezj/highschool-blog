@@ -1,0 +1,159 @@
+body {
+    font-family: monospace;
+    margin: 0;
+    padding: 20px;
+    background: #f0f0f0;
+    position: relative;
+}
+
+.container {
+    width: 70%;
+    margin-left: auto;
+    text-align: right;
+    position: relative;
+    z-index: 2;
+}
+
+.post {
+    margin-bottom: 40px;
+}
+
+.post-title {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border: 1px solid black;
+    max-width: 80%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.close {
+    cursor: pointer;
+    float: right;
+    font-size: 24px;
+}
+
+.back-arrow {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.instruction {
+    font-size: 14px;
+    color: black;
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.background-poem {
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    font-size: 18px;
+    font-family: monospace;
+    white-space: pre-line;
+    color: rgb(0, 0, 0);
+    opacity: 0.05;
+    z-index: 1;
+}
+
+img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border: 2px solid black;
+    background: white;
+    padding: 1px;
+}
+
+.centered-text {
+    text-align: center;
+    margin: 20px 0;
+    font-style: italic;
+    color: #555;
+    font-size: 30px;
+}
+
+.big-text-blue {
+    text-align: center;
+    margin: 20px 0;
+    font-style: normal;
+    color: blue;
+    font-size: 40px;
+}
+
+@media (max-width: 768px) {
+    .popup-content {
+        max-width: 90%;
+        padding: 10px;
+    }
+
+    .popup-content img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .popup-content h1, .popup-content h2, .popup-content p {
+        font-size: 16px;
+    }
+}
+/* Bliss fields popup*/
+.bliss-fields {
+    position: fixed;
+    top: 50px; /* Adjust as needed */
+    left: 20px;
+    font-size: 20px;
+    text-decoration: underline;
+    cursor: pointer;
+    color: black;
+    z-index: 3;
+}
+
+#blissPopup .popup-content {
+    background: white;
+    padding: 20px;
+    border: 1px solid black;
+    max-width: 80%;
+    max-height: 80vh;
+    overflow-y: auto;
+    text-align: center;
+}
+.blur-background {
+    filter: blur(5px);
+}
+
+.blur-text {
+    filter: blur(2px);
+}
+
+#blissPopup .popup-content {
+    filter: none;
+}
+/* End of Bliss fields popup*/
+
+.no-scroll {
+    overflow: hidden;
+}
