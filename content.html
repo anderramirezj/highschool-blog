@@ -111,19 +111,30 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
     
-    
-
     <script>
         function openPopup(id) {
             document.getElementById(id).style.display = 'flex';
-        }
-        function closePopup(id) {
-            document.getElementById(id).style.display = 'none';
+            document.body.classList.add('no-scroll');
         }
 
-        const poem = `I’m out here walking aimlessly, like a ghost in my own life. 
+        function closePopup(id) {
+            document.getElementById(id).style.display = 'none';
+            document.body.classList.remove('no-scroll');
+        }
+
+        document.addEventListener('click', function(event) {
+            const popups = document.querySelectorAll('.popup');
+            popups.forEach(popup => {
+                if (event.target === popup) {
+                popup.style.display = 'none';
+                document.body.classList.remove('no-scroll');
+                }
+            });
+        });
+
+const poem = `I’m out here walking aimlessly, like a ghost in my own life. 
 Every day feels like a loop, like I’m stuck in some endless hallway with no doors, 
 just mirrors reflecting back all the things I could be but ain’t yet. 
 I’m trying to do things, but it’s like my hands are tied by invisible strings.
@@ -139,9 +150,9 @@ They don’t see it, but they will.`;
         let index = 0;
         function typePoem() {
             if (index < poem.length) {
-                document.getElementById('poem').innerHTML += poem[index];
-                index++;
-                setTimeout(typePoem, Math.random() * 100 + 50);
+            document.getElementById('poem').innerHTML += poem[index];
+            index++;
+            setTimeout(typePoem, Math.random() * 100 + 50);
             }
         }
         typePoem();
