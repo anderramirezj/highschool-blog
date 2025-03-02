@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geniuses Archive</title>
+    <style>
+        body {
+            font-family: monospace;
+            background-color: #f0f0f0;
+            color: black;
+            padding: 20px;
+        }
+        .back-arrow {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            text-decoration: none;
+            color: black;
+            padding: 0;
+            margin: 0;
+            line-height: 1;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap; /* Allow items to wrap to the next line */
+            gap: 20px;
+            justify-content: center; /* Center items horizontally */
+        }
+        .file {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            width: 120px; /* Set a fixed width for each file */
+            text-align: center; /* Center the text below the icon */
+            padding: 10px; /* Add some padding inside the file */
+            box-sizing: border-box; /* Ensure padding is included in the width */
+            background: transparent; /* Ensure no background color */
+            border: none; /* Remove any border */
+            outline: none; /* Remove any outline */
+        }
+        .file:hover {
+            background: rgba(0, 0, 0, 0.05); /* Add a subtle hover effect */
+        }
+        .file-icon {
+            width: 100px;
+            height: 100px;
+            background-size: cover; /* Ensure the icon/thumbnail covers the area */
+            background-position: center; /* Center the icon/thumbnail */
+            margin-bottom: 5px; /* Space between icon and text */
+            border-radius: 5px; /* Optional: Add rounded corners to the icon */
+        }
+        .file-name {
+            color: red;
+            margin-top: 5px;
+            word-wrap: break-word; /* Ensure long file names wrap */
+            max-width: 100%; /* Ensure text doesn't overflow */
+        }
+        .popout {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: none;
+            max-width: 600px;
+            text-align: center;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        iframe, img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-arrow">← Back</a>
+    <div class="container">
+        <div class="file" onclick="openPopout('./images/geniuses/noahdillon_alexconsani.jpg', 'image')">
+            <div class="file-icon" style="background-image: url('./images/geniuses/noahdillon_alexconsani.jpg');"></div>
+            <span class="file-name">noahdillon_alexconsani.jpg</span>
+        </div>
+        
+        <div class="file" onclick="openPopout('https://www.youtube.com/embed/SuCYsNERsgA', 'video')">
+            <div class="file-icon" style="background-image: url('https://img.youtube.com/vi/SuCYsNERsgA/mqdefault.jpg');"></div>
+            <span class="file-name">2hollis_jeans.mp4</span>
+        </div>
+
+        <div class="file" onclick="openPopout('https://www.youtube.com/embed/EcDhdJtVvs4', 'video')">
+            <div class="file-icon" style="background-image: url('https://img.youtube.com/vi/EcDhdJtVvs4/mqdefault.jpg');"></div>
+            <span class="file-name">noahdillon_doyoubelieveingod.mp4</span>
+        </div>
+        
+        <div class="file" onclick="openPopout('https://www.youtube.com/embed/t8p8pwtLKnU', 'video')">
+            <div class="file-icon" style="background-image: url('https://img.youtube.com/vi/t8p8pwtLKnU/mqdefault.jpg');"></div>
+            <span class="file-name">spigottan_ytpbozo.mp4</span>
+        </div>
+
+        <div class="file" onclick="openPopout('https://www.youtube.com/embed/WELszoJZzNw', 'video')">
+            <div class="file-icon" style="background-image: url('https://img.youtube.com/vi/WELszoJZzNw/mqdefault.jpg');"></div>
+            <span class="file-name">tat_theatrical.mp4</span>
+        </div>
+
+        <div class="file" onclick="openPopout('./images/geniuses/aaronbleasdale_hundredsoftimes.jpg', 'image')">
+            <div class="file-icon" style="background-image: url('./images/geniuses/aaronbleasdale_hundredsoftimes.jpg');"></div>
+            <span class="file-name">aaronbleasdale_hundredsoftimes.jpg</span>
+        </div>
+    </div>
+    
+    <div class="popout" id="popout">
+        <span class="close-btn" onclick="closePopout()">X</span>
+        <div id="popout-content"></div>
+    </div>
+    
+    <script>
+        function openPopout(url, type) {
+            let content = '';
+            if (type === 'image') {
+                content = `<img src="${url}" alt="image">`;
+            } else if (type === 'video') {
+                content = `<iframe src="${url}" allowfullscreen></iframe>`;
+            } else if (type === 'instagram') {
+                content = `<iframe src="${url}" allowfullscreen></iframe>`;
+            }
+            document.getElementById('popout-content').innerHTML = content;
+            document.getElementById('popout').style.display = 'block';
+        }
+        
+        function closePopout() {
+            document.getElementById('popout').style.display = 'none';
+            document.getElementById('popout-content').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
