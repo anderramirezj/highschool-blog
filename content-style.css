@@ -124,6 +124,88 @@ img {
     }
 }
 
+
+
+/* Add styles for the password prompt */
+.password-prompt {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    font-family: monospace;
+    z-index: 1000;
+    backdrop-filter: blur(10px); /* Add blur effect */
+    transition: opacity 1s ease, backdrop-filter 1s ease; /* Smooth transition */
+}
+
+.password-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.password-input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid white;
+    color: white;
+    font-size: 1.5em;
+    text-align: center;
+    outline: none;
+    margin-top: 20px;
+}
+
+.password-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.password-error {
+    color: red;
+    margin-top: 10px;
+    display: none;
+}
+
+.confirm-arrow {
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.confirm-arrow:hover {
+    opacity: 0.8;
+ }
+
+.content {
+    opacity: 0; /* Start hidden */
+    transition: opacity 1s ease; /* Smooth fade-in */
+    display: block; /* Ensure content is always in the DOM */
+}
+
+.content.visible {
+    opacity: 1; /* Fully visible */
+}
+
+.back-arrow-password {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 1.5em;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.back-arrow-password:hover {
+    opacity: 0.8;
+}
+    
 .no-scroll {
     overflow: hidden;
 }
