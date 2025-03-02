@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="content-style.css">
 </head>
 <body>
+    <!-- Password Prompt -->
     <div class="password-prompt" id="passwordPrompt">
         <a href="index.html" class="back-arrow-password">← Back</a>
         <div>Enter the passcode:</div>
@@ -17,6 +18,7 @@
         <div class="password-error" id="passwordError">Incorrect passcode. Try again.</div>
     </div>
 
+    <!-- Content -->
     <div class="content" id="content">
         <a href="index.html" class="back-arrow">← Back</a>
         <div class="background-poem" id="poem"></div>
@@ -114,13 +116,12 @@
 
         function checkPassword() {
             if (passwordInput.value === correctPassword) {
-                // Add a blur transition and fade out the password prompt
                 passwordPrompt.style.opacity = '0';
                 passwordPrompt.style.backdropFilter = 'blur(0px)';
                 setTimeout(() => {
                     passwordPrompt.style.display = 'none';
-                    content.classList.add('visible'); // Fade in the content
-                }, 1000); // Match the transition duration (1s)
+                    content.classList.add('visible');
+                }, 1000);
             } else {
                 passwordError.style.display = 'block';
             }
@@ -133,10 +134,14 @@
             }
         });
 
-        // Check password on arrow click
+        // Check password on arrow click or touch
         document.querySelector('.confirm-arrow').addEventListener('click', checkPassword);
+        document.querySelector('.confirm-arrow').addEventListener('touchend', (e) => {
+            e.preventDefault(); // Prevent default touch behavior
+            checkPassword();
+        });
 
-        // Existing popup and poem functionality
+        // Popup functionality
         function openPopup(id) {
             document.getElementById(id).style.display = 'flex';
             document.body.classList.add('no-scroll');
@@ -157,6 +162,7 @@
             });
         });
 
+        // Background poem typing effect
         const poem = `I’m out here walking aimlessly, like a ghost in my own life. 
 Every day feels like a loop, like I’m stuck in some endless hallway with no doors, 
 just mirrors reflecting back all the things I could be but ain’t yet. 

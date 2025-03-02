@@ -90,43 +90,7 @@ img {
     padding: 1px;
 }
 
-.centered-text {
-    text-align: center;
-    margin: 20px 0;
-    font-style: italic;
-    color: #555;
-    font-size: 30px;
-}
-
-.big-text-blue {
-    text-align: center;
-    margin: 20px 0;
-    font-style: normal;
-    color: blue;
-    font-size: 40px;
-}
-
-@media (max-width: 768px) {
-    .popup-content {
-        max-width: 90%;
-        padding: 10px;
-    }
-
-    .popup-content img {
-        width: 100%;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-    }
-
-    .popup-content h1, .popup-content h2, .popup-content p {
-        font-size: 16px;
-    }
-}
-
-
-
-/* Add styles for the password prompt */
+/* Password Prompt Styles */
 .password-prompt {
     position: fixed;
     top: 0;
@@ -141,14 +105,17 @@ img {
     color: white;
     font-family: monospace;
     z-index: 1000;
-    backdrop-filter: blur(10px); /* Add blur effect */
-    transition: opacity 1s ease, backdrop-filter 1s ease; /* Smooth transition */
+    backdrop-filter: blur(10px);
+    transition: opacity 1s ease, backdrop-filter 1s ease;
+    text-align: center; /* Ensure text is centered */
 }
 
 .password-input-container {
     display: flex;
     align-items: center;
     gap: 10px;
+    justify-content: center; /* Center the input and arrow horizontally */
+    width: 100%; /* Ensure the container takes full width */
 }
 
 .password-input {
@@ -160,6 +127,7 @@ img {
     text-align: center;
     outline: none;
     margin-top: 20px;
+    width: 200px; /* Fixed width for better alignment */
 }
 
 .password-input::placeholder {
@@ -170,6 +138,7 @@ img {
     color: red;
     margin-top: 10px;
     display: none;
+    text-align: center; /* Ensure error message is centered */
 }
 
 .confirm-arrow {
@@ -180,16 +149,16 @@ img {
 
 .confirm-arrow:hover {
     opacity: 0.8;
- }
+}
 
 .content {
-    opacity: 0; /* Start hidden */
-    transition: opacity 1s ease; /* Smooth fade-in */
-    display: block; /* Ensure content is always in the DOM */
+    opacity: 0;
+    transition: opacity 1s ease;
+    display: block;
 }
 
 .content.visible {
-    opacity: 1; /* Fully visible */
+    opacity: 1;
 }
 
 .back-arrow-password {
@@ -205,7 +174,29 @@ img {
 .back-arrow-password:hover {
     opacity: 0.8;
 }
-    
+
 .no-scroll {
     overflow: hidden;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .password-input {
+        font-size: 1.2em; /* Smaller font size for mobile */
+        width: 90%; /* Wider input field */
+    }
+
+    .confirm-arrow {
+        font-size: 1.2em; /* Smaller arrow for mobile */
+    }
+
+    .popup-content {
+        max-width: 90%; /* Wider popup for mobile */
+        padding: 10px;
+    }
+
+    .popup-content img {
+        width: 100%;
+        height: auto;
+    }
 }
