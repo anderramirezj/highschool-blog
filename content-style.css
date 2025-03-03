@@ -173,8 +173,10 @@ img {
     cursor: pointer;
 }
 
-.back-arrow-password:hover {
-    opacity: 0.8;
+.back-arrow-password span {
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
 }
 
 .no-scroll {
