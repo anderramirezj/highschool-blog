@@ -1,0 +1,32 @@
+body {
+    font-family: monospace;
+    background: white;
+    color: black;
+    text-align: left;
+    padding: 20px;
+}
+.path {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    padding: 5px 0;
+    cursor: pointer;
+}
+.folder::before {
+    content: "📁 ";
+}
+.file::before {
+    content: "📄 ";
+}
+a {
+    text-decoration: none;
+    color: red;
+}
+a:hover {
+    text-decoration: underline;
+}
