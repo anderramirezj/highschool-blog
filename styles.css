@@ -1,0 +1,1018 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+}
+
+body {
+    background-color: #111;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+}
+
+.title-bar {
+    background: linear-gradient(to right, #0058ee 0%, #3f8cff 10%, #0058ee 25%, #0058ee 90%, #003cb7 100%);
+    height: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3px;
+    color: white;
+    font-weight: bold;
+    font-size: 11px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    border-bottom: 1px solid #000;
+}
+
+.window-title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.wmp-icon {
+    width: 16px;
+    height: 16px;
+    background-image: url('./icons/Icon_wmp.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.window-controls {
+    display: flex;
+    gap: 2px;
+}
+
+.window-controls button {
+    width: 21px;
+    height: 21px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: white;
+    font-size: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hide minimize and maximize buttons */
+.window-controls button:not(.close) {
+    display: none;
+}
+
+.window-controls button:hover {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.window-controls .close {
+    font-weight: bold;
+}
+
+.window-controls .close:hover {
+    background: #c24343;
+}
+
+.track-meta {
+    font-size: 11px;
+    opacity: 0.8;
+    margin-top: 5px;
+}
+
+.ambience {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: white;
+    font-size: 11px;
+    opacity: 0.7;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+.player-container {
+    opacity: 0;
+    display: none;
+    width: 600px;
+    height: 450px;
+    background: linear-gradient(135deg, #1f3f7c 0%, #0c1f3e 100%);
+    border: 1px solid #000;
+    border-radius: 8px 8px 3px 3px;
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.3),
+        0 0 0 1px rgba(0,0,0,0.8),
+        2px 2px 5px rgba(0,0,0,0.4),
+        0 0 20px rgba(0, 0, 0, 0.6);
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    z-index: 12;
+}
+
+.player-reveal {
+    display: flex !important;
+    animation: revealPlayer 0.5s ease-out forwards;
+}
+
+.closing {
+    animation: windowClose 0.3s ease-in forwards !important;
+}
+
+.restoring {
+    display: flex !important;
+    animation: windowRestore 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important;
+}
+
+@keyframes windowRestore {
+    0% {
+        opacity: 0;
+        transform: scale(0.2) translateY(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes windowClose {
+    0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.2) translateY(100px);
+    }
+}
+
+@keyframes revealPlayer {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.menu-bar {
+    background: linear-gradient(to bottom, 
+        #4080ff 0%,
+        #2060dd 45%,
+        #1a4fc7 46%,
+        #103c96 100%);
+    padding: 3px 8px;
+    border-bottom: 1px solid #000;
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.3),
+        0 1px 2px rgba(0,0,0,0.2);
+}
+
+.menu-items {
+    display: flex;
+    gap: 15px;
+}
+
+.menu-items span {
+    color: white;
+    cursor: pointer;
+    font-size: 11px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    padding: 2px 5px;
+}
+
+.menu-items span:hover {
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+}
+
+.menu-items span u {
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+.main-content {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    width: 150px;
+    background: linear-gradient(to right,
+        #2a4c8c 0%,
+        #1a3c7c 100%);
+    padding: 10px 0;
+    border-right: 1px solid #000;
+    box-shadow: 
+        inset -1px 0 0 rgba(255,255,255,0.1);
+}
+
+.sidebar div {
+    color: white;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 11px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    border: 1px solid transparent;
+}
+
+.sidebar div:hover {
+    background: linear-gradient(to bottom,
+        #5090ff 0%,
+        #2060dd 100%);
+    border: 1px solid #000;
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.sidebar div i {
+    width: 16px;
+    margin-right: 8px;
+    opacity: 0.9;
+}
+
+.player-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.visualization {
+    flex: 1;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #000;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+}
+
+.visual-effect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center,
+        rgba(0,102,204,0.8) 0%,
+        rgba(0,51,153,0.4) 50%,
+        transparent 70%);
+    animation: xp-pulse 4s infinite;
+}
+
+@keyframes xp-pulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 0.6; }
+}
+
+.track-info {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    z-index: 1;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.8);
+}
+
+.track-info h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.track-info h3 {
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+.playlist-panel {
+    height: 200px;
+    background: #000;
+    color: white;
+    border-top: 1px solid #000;
+}
+
+.playlist-header {
+    padding: 5px 10px;
+    background: linear-gradient(to bottom,
+        #4080ff 0%,
+        #2060dd 100%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    border-bottom: 1px solid #000;
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.playlist-items {
+    padding: 5px;
+    font-size: 11px;
+}
+
+.playlist-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 3px 5px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.playlist-item.active {
+    background: linear-gradient(to bottom,
+        #5090ff 0%,
+        #2060dd 100%);
+    border: 1px solid #000;
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.controls {
+    height: 90px;
+    background: linear-gradient(to bottom,
+        #4080ff 0%,
+        #2060dd 45%,
+        #1a4fc7 46%,
+        #103c96 100%);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 1px solid #000;
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.control-buttons {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+
+.control-buttons button {
+    background: linear-gradient(to bottom,
+        #5090ff 0%,
+        #2060dd 45%,
+        #1a4fc7 46%,
+        #103c96 100%);
+    border: 1px solid #000;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.3),
+        0 1px 2px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+.control-buttons button:hover {
+    background: linear-gradient(to bottom,
+        #60a0ff 0%,
+        #3070ed 45%,
+        #2a5fd7 46%,
+        #204ca6 100%);
+}
+
+.control-buttons button:active {
+    background: linear-gradient(to bottom,
+        #103c96 0%,
+        #1a4fc7 54%,
+        #2060dd 55%,
+        #4080ff 100%);
+    box-shadow: 
+        inset 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 5px;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 10px;
+    background: #000;
+    border-radius: 2px;
+    cursor: pointer;
+    border: 1px solid #000;
+    box-shadow: 
+        inset 0 1px 3px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.progress {
+    width: 30%;
+    height: 100%;
+    background: linear-gradient(to bottom,
+        #60ff60 0%,
+        #00dd00 45%,
+        #00c700 46%,
+        #009600 100%);
+    border-radius: 1px;
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.time {
+    color: white;
+    font-size: 11px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+.volume-container {
+    width: 100px;
+    height: 10px;
+    background: #000;
+    border-radius: 2px;
+    cursor: pointer;
+    align-self: flex-end;
+    border: 1px solid #000;
+    box-shadow: 
+        inset 0 1px 3px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.volume {
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(to bottom,
+        #60ff60 0%,
+        #00dd00 45%,
+        #00c700 46%,
+        #009600 100%);
+    border-radius: 1px;
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.dynamic-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+.dynamic-background video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* Dark overlay for the entire background */
+.dynamic-background::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: 
+        radial-gradient(
+            circle at 50% 50%,
+            transparent 0%,
+            rgba(0, 0, 0, 0.3) 60%,
+            rgba(0, 0, 0, 0.7) 100%
+        ),
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 50%
+        ),
+        rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    z-index: 15;
+    mix-blend-mode: multiply;
+}
+
+/* Main light effect */
+.dynamic-background::after {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 200vmax;
+    height: 200vmax;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0.1) 20%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 14;
+    mix-blend-mode: soft-light;
+}
+
+/* Additional atmospheric vignette */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: 
+        radial-gradient(
+            circle at center,
+            transparent 0%,
+            rgba(0, 0, 0, 0.2) 50%,
+            rgba(0, 0, 0, 0.6) 100%
+        ),
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.05) 0px,
+            rgba(0, 0, 0, 0.05) 1px,
+            transparent 1px,
+            transparent 2px
+        );
+    pointer-events: none;
+    z-index: 13;
+    mix-blend-mode: multiply;
+}
+
+/* Enhance the smoke effect */
+.smoke-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(255, 255, 255, 0.1) 0%,
+        transparent 70%
+    );
+    filter: blur(60px);
+    mix-blend-mode: screen;
+    opacity: 0.2;
+    animation: smokeMove 20s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 12;
+}
+
+@keyframes smokeMove {
+    0%, 100% { 
+        transform: translate(0, 0) scale(1); 
+        opacity: 0.2; 
+    }
+    50% { 
+        transform: translate(-20px, -20px) scale(1.2); 
+        opacity: 0.3; 
+    }
+}
+
+.bg-video-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding: 30px;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+.main-video,
+.gan-video {
+    position: relative;
+    overflow: visible;
+    border-radius: 8px;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        0 8px 24px rgba(0, 0, 0, 0.2),
+        0 16px 32px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: perspective(1000px) translateZ(0);
+    transition: transform 0.3s ease;
+}
+
+/* Pseudo-element for inner glow */
+.main-video::before,
+.gan-video::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 50px rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Video container hover effects */
+.main-video:hover,
+.gan-video:hover {
+    transform: perspective(1000px) translateZ(10px);
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.3),
+        0 16px 32px rgba(0, 0, 0, 0.2),
+        0 24px 48px rgba(0, 0, 0, 0.15);
+}
+
+/* Add subtle reflection effect */
+.main-video video,
+.gan-video video {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gan-video video {
+    filter: brightness(1.1) contrast(1.1) saturate(0.9) hue-rotate(30deg);
+}
+
+/* Remove the after pseudo-elements that contained the vignettes */
+.main-video::after,
+.gan-video::after {
+    display: none;
+}
+
+.main-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gan-outputs {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+    height: calc(100vh - 40px);
+}
+
+.gan-video {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        0 8px 24px rgba(0, 0, 0, 0.2),
+        0 16px 32px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: perspective(1000px) translateZ(0);
+    transition: transform 0.3s ease;
+}
+
+.gan-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 1;
+    filter: brightness(1.1) contrast(1.1) saturate(0.9);
+}
+
+.gan-video::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(
+            rgba(18, 16, 16, 0) 50%,
+            rgba(0, 0, 0, 0.25) 50%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 0, 0, 0.06),
+            rgba(0, 255, 0, 0.02),
+            rgba(0, 0, 255, 0.06)
+        );
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    overflow: visible;
+}
+
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.video-progress {
+    flex: 1;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.3);
+    position: relative;
+    cursor: pointer;
+}
+
+.video-progress-bar {
+    height: 100%;
+    background: #ff0000;
+    width: 0%;
+}
+
+.video-time {
+    color: white;
+    font-size: 12px;
+    min-width: 50px;
+    text-align: right;
+}
+
+/* Center light effect */
+.dynamic-background::after {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 200vmax;
+    height: 200vmax;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(255, 255, 255, 0.05) 20%,
+        transparent 50%
+    );
+    pointer-events: none;
+    z-index: 3;
+    mix-blend-mode: soft-light;
+}
+
+.small-video {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 169px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.small-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.japanese-characters {
+    position: absolute;
+    top: 50%;
+    right: 25%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 20;
+}
+
+.japanese-character {
+    font-size: 80px;
+    color: #ff0000;
+    text-shadow: 
+        2px 2px 0 #ff3333,
+        4px 4px 0 #ff6666,
+        6px 6px 0 #ff9999,
+        0 0 20px rgba(255, 0, 0, 0.5);
+    animation: float3d 8s ease-in-out infinite;
+    transform-style: preserve-3d;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.3));
+}
+
+@keyframes float3d {
+    0%, 100% {
+        transform: 
+            translateY(0) 
+            rotateY(0deg) 
+            rotateX(0deg) 
+            scale(1);
+    }
+    25% {
+        transform: 
+            translateY(-30px) 
+            rotateY(45deg) 
+            rotateX(15deg) 
+            scale(1.1);
+    }
+    50% {
+        transform: 
+            translateY(0) 
+            rotateY(90deg) 
+            rotateX(0deg) 
+            scale(1);
+    }
+    75% {
+        transform: 
+            translateY(30px) 
+            rotateY(45deg) 
+            rotateX(-15deg) 
+            scale(0.9);
+    }
+}
+
+.japanese-character:nth-child(1) { animation-delay: 0s; }
+.japanese-character:nth-child(2) { animation-delay: -2s; }
+.japanese-character:nth-child(3) { animation-delay: -4s; }
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Taskbar styles */
+.taskbar-icon {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    background: #1f3f7c;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    padding: 4px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.taskbar-icon.visible {
+    transform: translateX(-50%) translateY(-10px);
+    opacity: 1;
+    pointer-events: all;
+}
+
+.taskbar-icon img {
+    width: 16px;
+    height: 16px;
+}
+
+.taskbar-icon span {
+    color: white;
+    font-size: 11px;
+}
+
+/* CRT Monitor turn on effect */
+.crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    z-index: 9999;
+    pointer-events: none;
+    animation: crtTurnOn 2.2s ease-in-out forwards;
+}
+
+.crt-flash {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100vw;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.8),
+        0 0 40px rgba(255, 255, 255, 0.6),
+        0 0 60px rgba(255, 255, 255, 0.4);
+    z-index: 10000;
+    pointer-events: none;
+    animation: crtFlash 2s ease-out forwards;
+}
+
+@keyframes crtTurnOn {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    5% {
+        opacity: 1;
+        transform: scale(1.02);
+    }
+    20% {
+        opacity: 1;
+        background: #0a0a0a;
+    }
+    50% {
+        opacity: 1;
+        background: #050505;
+    }
+    80% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+@keyframes crtFlash {
+    0% {
+        left: -100%;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    20% {
+        left: 100%;
+        opacity: 0;
+    }
+    100% {
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+/* Add scanlines effect after turn on */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.02) 50%,
+        rgba(255, 255, 255, 0) 51%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 9998;
+    animation: showScanlines 3s ease forwards;
+    animation-delay: 2s;
+}
+
+@keyframes showScanlines {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.5;
+    }
+} 
