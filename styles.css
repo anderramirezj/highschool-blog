@@ -104,7 +104,7 @@ body {
 .player-container {
     height: 450px;
     min-height: 0;
-    display: none;
+    display: flex;
     flex-direction: column;
     width: 600px;
     max-height: 98vh;
@@ -119,15 +119,11 @@ body {
     overflow: hidden;
     position: relative;
     z-index: 12;
-    opacity: 0;
-    visibility: hidden;
 }
 
 .player-reveal {
     display: flex !important;
     animation: revealPlayer 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    visibility: visible;
-    opacity: 1;
 }
 
 .closing {
@@ -1038,7 +1034,7 @@ body::after {
 .audio-controls-container:not(.visible) {
     height: 0 !important;
     min-height: 0 !important;
-    opacity: 0;
+        opacity: 0;
     visibility: hidden;
     overflow: hidden;
     padding: 0;
@@ -1099,7 +1095,7 @@ body::after {
     top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(20,30,60,0.65);
     z-index: 1;
-}
+    }
 .video-modal-content {
     position: relative;
     z-index: 2;
