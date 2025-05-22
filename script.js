@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load durations for all tracks
     musicFiles.forEach((file, idx) => {
-        const audio = new Audio(`music/${file}`);
+        const audio = new Audio(`./music/${file}`);
         audio.addEventListener('loadedmetadata', () => {
             durations[idx] = formatTime(audio.duration);
             // Update duration in playlist
@@ -220,6 +220,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (item) {
                 item.querySelector('.duration').textContent = durations[idx];
             }
+        });
+        audio.addEventListener('error', (e) => {
+            console.error(`Error loading audio file: ${file}`, e);
         });
     });
 
@@ -236,8 +239,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Play track by index
     function playTrack(idx) {
         const file = musicFiles[idx];
-        audioPlayer.src = `music/${file}`;
-        audioPlayer.play();
+        audioPlayer.src = `./music/${file}`;
+        audioPlayer.play().catch(error => {
+            console.error('Error playing audio:', error);
+            // Try to play on user interaction
+            document.addEventListener('click', () => {
+                audioPlayer.play().catch(e => console.error('Still cannot play:', e));
+            }, { once: true });
+        });
         currentTrackIndex = idx;
         // Update UI
         document.querySelectorAll('.playlist-item').forEach((i, j) => {
