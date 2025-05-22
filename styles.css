@@ -104,7 +104,7 @@ body {
 .player-container {
     height: 450px;
     min-height: 0;
-    display: flex;
+    display: none;
     flex-direction: column;
     width: 600px;
     max-height: 98vh;
@@ -119,11 +119,15 @@ body {
     overflow: hidden;
     position: relative;
     z-index: 12;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .player-reveal {
     display: flex !important;
     animation: revealPlayer 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    visibility: visible;
+    opacity: 1;
 }
 
 .closing {
