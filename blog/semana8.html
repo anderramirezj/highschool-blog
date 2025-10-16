@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semana 8 — y2k / curse web</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Tahoma, Verdana, sans-serif; color:#e7ffe7; background: #000 url("img/semana8_textura.GIF") center/280px repeat fixed;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="%237aff00" d="M6 16c0-2 2-3 3-1l1-7c0-2 3-2 3 0l1 6 1-5c0-2 3-2 3 0l1 6 1-3c1-2 3-1 3 1l-1 9c0 4-5 6-9 5-4-1-7-5-7-8z"/><circle cx="26" cy="26" r="3" fill="%2300ffd0"/></svg>') 3 2, auto; }
+
+        /* y2k shell */
+        .shell { max-width: 920px; margin: 24px auto; background: linear-gradient(180deg,#061006,#030a03); border: 4px ridge #7aff00; box-shadow: 0 0 0 3px #00ffd0 inset, 0 0 24px #7aff00, 0 0 60px rgba(0,255,128,.25); position: relative; }
+        /* organic texture frame */
+        .shell::before { content:""; position:absolute; inset:-16px; pointer-events:none; z-index:0;
+            background: url("img/semana8_textura2.GIF") center/240px repeat; border:8px ridge #00ffd0; 
+            box-shadow: inset 0 0 30px #00ffd0, 0 0 30px #ff00ff; filter: contrast(140%) saturate(160%);
+        }
+        .shell::after { content:""; position:absolute; inset:0; pointer-events:none; z-index:0; mix-blend-mode: overlay; opacity:.2;
+            background: 
+              radial-gradient(circle at 12px 12px, #ff005e 0 6px, transparent 7px),
+              radial-gradient(circle at calc(100% - 12px) 12px, #ff005e 0 6px, transparent 7px),
+              radial-gradient(circle at 12px calc(100% - 12px), #ff005e 0 6px, transparent 7px),
+              radial-gradient(circle at calc(100% - 12px) calc(100% - 12px), #ff005e 0 6px, transparent 7px),
+              repeating-linear-gradient(transparent 0 2px, rgba(0,255,208,.08) 2px 3px);
+        }
+        .chrome { background: linear-gradient(90deg,#001a0a,#003311,#001a0a); padding: 10px; border-bottom: 3px ridge #7aff00; display:flex; align-items:center; justify-content: space-between; position: relative; z-index: 1; }
+        .title { font-weight: 700; letter-spacing: .5px; color: #e8ffe8; text-shadow: 0 0 6px #7aff00, 0 0 10px #00ffd0; }
+        .badges { display:flex; gap:6px; }
+        .badge { background:#031107; border:2px groove #7aff00; color:#d9ffd9; padding:3px 6px; font-size:11px; }
+
+        .checker { height: 32px; background:
+            repeating-linear-gradient(90deg, #ff00bd 0 16px, #00a0ff 16px 32px),
+            repeating-linear-gradient(0deg, #ffe600 0 16px, transparent 16px 32px);
+            mix-blend-mode: difference; border-bottom: 3px ridge #00ffd0; filter: hue-rotate(25deg) saturate(180%);
+            animation: hue 6s linear infinite; }
+        @keyframes hue { to { filter: hue-rotate(385deg) saturate(220%); } }
+
+        .marq { background:#00190a; color:#d9ffd9; border-top:2px groove #00ffd0; border-bottom:2px groove #7aff00; white-space: nowrap; overflow:hidden; }
+        .marq span { display:inline-block; padding:6px 0; animation: roll 18s linear infinite; }
+        @keyframes roll { 0%{ transform: translateX(100%);} 100%{ transform: translateX(-100%);} }
+
+        /* post */
+        .post { display:grid; grid-template-columns: 1fr 260px; gap:16px; padding:16px; position: relative; z-index: 1; }
+        .entry h1 { font-size:20px; color:#c6ff8f; text-shadow: 0 0 10px #7aff00, 0 0 6px #00ffd0; margin-bottom:6px; }
+        .meta { font-size:12px; color:#9fd6a0; margin-bottom:12px; }
+        .entry p { margin: 10px 0; color:#e7ffe7; }
+        .entry img { max-width:100%; border:2px inset #7aff00; display:block; margin:10px auto; filter: saturate(140%) contrast(120%); }
+        .quote { background:#062013; border-left:4px solid #7aff00; padding:10px; font-style: italic; color:#d6ffd6; }
+
+        .side { background:#030e09; border:3px groove #00ffd0; padding:12px; }
+        .side h3 { color:#9bffe8; margin-bottom:8px; text-shadow: 0 0 6px #00ffd0; }
+        .webring { display:grid; gap:8px; }
+        .btn { display:inline-block; background:#031107; border:2px ridge #7aff00; color:#d9ffd9; padding:6px 8px; text-decoration:none; font-size:12px; transform: skew(-6deg); box-shadow: 0 0 10px #00ffd0; transition: filter .15s, transform .15s; }
+        .btn:hover { filter: hue-rotate(35deg) saturate(180%); transform: skew(-6deg) rotate(-1deg); }
+
+        .footer { text-align:center; color:#b6e8c3; padding:10px; border-top:3px ridge #7aff00; background:#00150a; font-size:12px; position: relative; z-index: 1; }
+
+        /* cursed vibes */
+        .cursorTrail { position: fixed; width:6px; height:6px; pointer-events:none; border-radius:50%; background: #7aff00; box-shadow: 0 0 8px #ff00ff, 0 0 14px #00e0ff; opacity:.8; }
+        .glitch { position:relative; }
+        .glitch::before, .glitch::after { content: attr(data-g); position:absolute; left:0; top:0; width:100%; opacity:.6; }
+        .glitch::before { transform: translate(2px,0); color:#00ffd0; }
+        .glitch::after { transform: translate(-2px,0); color:#7aff00; }
+
+        .hud { position:absolute; top:8px; right:10px; font-size:11px; color:#d9ffd9; background: rgba(0,20,10,.65); border:2px ridge #7aff00; padding:4px 6px; box-shadow: inset 0 0 14px #00ffd0, 0 0 10px #7aff00; }
+
+        @media (max-width: 860px) { .post { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="shell">
+        <div class="chrome">
+            <div class="title glitch" data-g="blog">blog</div>
+            <div class="badges">
+                <div class="badge">best viewed 1024×768</div>
+                <div class="badge" id="vis">visitor #00666</div>
+            </div>
+        </div>
+        <div class="checker"></div>
+        <div class="marq"><span>★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</span></div>
+
+        <div class="post">
+            <article class="entry">
+                <h1>Semana 8</h1>
+                <div class="meta"><span id="date"></span></div>
+                <p>Las luces del baño pegaban en las baldosas negras. Hacían brillar las gotas de agua. Destellos chiquitos que se perdían en la oscuridad. Agarré mi piel. Sentí el metal frío en mi pulgar. Bajó, despacio. Hizo un corte fino en la piel. Salió la sangre. Primero era un rocío, como una niebla roja. Después un hilo que no paraba.</p>
+                <p>Miré las gotas. Se mezclaban con tu sudor en la espalda. Hacían remolinos brillantes. Tu piel olía a sal. Ahora ese olor se metía en mi herida. Cada gota de mi sangre caía y se unía a tu piel aceitosa. Se hacía una cosa nueva, espesa.</p>
+                <p>El corte me ardía. Pero al tocar tu cuerpo, se sintió diferente. Espesa. Como que unía todo. Moví la mano por tu hombro. Hice líneas rojas siguiendo tus músculos. Era un testigo mudo.</p>
+                <p>Mis dedos apretaron un poco los bordes del corte. Hice que se abriera más. La sangre salió con más ganas. Hilos finos que se enredaban en los pelitos de tu brazo. Hacían dibujos en tu piel, esa piel tuya color del sol.</p>
+                <p>Tu piel aceitosa era un bálsamo. Hizo una crema espesa que quitaba el ardor del principio. Miré cómo esa cosa rojiza se pegaba a tus poros, se metía en cada pedacito de tu piel. Con mis dedos, hice círculos alrededor de la herida. Iba esparciendo la mezcla como si fuera un ungüento.</p>
+                <img src="img/semana8_6.png" alt="semana8_2">
+                <div class="quote">“Con el calor de nuestros cuerpos, la sangre se mantenía espesa. Se movía despacio por la curva de tu espalda. Con cada movimiento mío, caían más gotas del corte. Su filo manchado de rojo oscuro era lo único que nos recordaba que, alguna vez, hubo un límite entre nosotros.”</div>
+            </article>
+
+            <aside class="side">
+                <h3>badges & links</h3>
+                <div class="webring">
+                    <a class="btn" href="../index.html">home</a>
+                    <a class="btn" href="semana7.html">← semana 7</a>
+                </div>
+            </aside>
+        </div>
+
+        <div class="footer">© 2025</div>
+    </div>
+
+    <script>
+        // date
+        document.getElementById('date').textContent = new Date().toLocaleDateString('es-ES');
+        // silly visitor counter
+        var v = 666 + Math.floor(Math.random()*33); document.getElementById('vis').textContent = 'visitor #' + String(v).padStart(5,'0');
+        // cursor trail
+        const trail = []; const LIMIT = 14;
+        window.addEventListener('mousemove', (e)=>{
+            const dot = document.createElement('div'); dot.className='cursorTrail'; dot.style.left = (e.clientX-3)+'px'; dot.style.top=(e.clientY-3)+'px';
+            document.body.appendChild(dot); trail.push(dot);
+            setTimeout(()=>{ dot.style.transition='opacity .4s, transform .4s'; dot.style.opacity='0'; dot.style.transform='scale(.4)'; }, 10);
+            setTimeout(()=>{ dot.remove(); }, 450);
+            if (trail.length>LIMIT) { const d = trail.shift(); if (d) d.remove(); }
+        });
+        // image click hue shift
+        document.querySelectorAll('.entry img').forEach(img=>{
+            img.addEventListener('click',()=>{ img.style.filter = 'hue-rotate('+(Math.random()*360)+'deg) saturate(180%) contrast(120%)'; });
+        });
+
+        // WebAudio hover/click sounds
+        let audioCtx; let bufHover; let bufClick;
+        async function initAudio(){
+            if (audioCtx) return; audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+            // synth small blips
+            bufHover = audioCtx.createBuffer(1, audioCtx.sampleRate*0.07, audioCtx.sampleRate);
+            bufClick = audioCtx.createBuffer(1, audioCtx.sampleRate*0.09, audioCtx.sampleRate);
+            const h = bufHover.getChannelData(0); const c = bufClick.getChannelData(0);
+            for(let i=0;i<h.length;i++){ h[i] = Math.sin(i/2)*Math.exp(-i/h.length)*0.25; }
+            for(let i=0;i<c.length;i++){ c[i] = (Math.random()*2-1)*Math.exp(-i/c.length)*0.35; }
+        }
+        function play(buf){ if(!audioCtx) return; const src = audioCtx.createBufferSource(); src.buffer = buf; const g = audioCtx.createGain(); g.gain.value=0.5; src.connect(g).connect(audioCtx.destination); src.start(); }
+        function hookSounds(el){ el.addEventListener('mouseenter', ()=>{ initAudio().then(()=>play(bufHover)); }); el.addEventListener('click', ()=>{ initAudio().then(()=>play(bufClick)); }); }
+        document.querySelectorAll('a.btn, .btn, .badge').forEach(hookSounds);
+    </script>
+</body>
+</html>
